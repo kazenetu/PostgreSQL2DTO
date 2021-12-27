@@ -20,8 +20,8 @@
   </Target>
 
   <!-- T4toCSを使ってT4ファイルからCSソースファイルを生成 -->
-  <Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild" Condition="!Exists('templates/*.Generated.cs')">
-    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet ../Lib/T4toCS/bin/T4toCS.dll %(TextTemplate.Identity) GenerateCS %(TextTemplate.Filename) templates/%(TextTemplate.Filename).Generated.cs" />
+  <Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet ../Lib/T4toCS/bin/T4toCS.dll %(TextTemplate.Identity) GenerateCS %(TextTemplate.Filename) Templates/%(TextTemplate.Filename).Generated.cs" />
   </Target>
 
   <!-- 自動生成したファイルを削除 -->
