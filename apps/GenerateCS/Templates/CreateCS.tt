@@ -1,0 +1,24 @@
+<#@ template language="C#" linePragmas="false" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Logic.Interface" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<#= GetCSComment(table.Name) #>
+public class <#= GetCSName(table.Name) #>
+{
+    public <#= GetCSName(table.Name) #>()
+    {
+        <# 
+        foreach(var column in table.Columns)
+        {
+        #>
+            <#= GetCSComment(column.Name) #>
+            public <#= column.DataType #> <#= GetCSName(column.Name) #> {set; get;}
+        <# 
+        }
+        #>
+    }
+}
