@@ -22,6 +22,11 @@ namespace GenerateCS.Templates
         public CreateCS(ITable table) { this.table = table; }
 
         /// <summary>
+        /// ファイル名
+        /// </summary>
+        public string FileName { get { return GetCSName(table.Name); } }
+
+        /// <summary>
         /// テーブル名やカラム名からC#用名称を取得
         /// </summary>
         /// <param name="name">DBから取得したテーブル名やカラム名</param>
