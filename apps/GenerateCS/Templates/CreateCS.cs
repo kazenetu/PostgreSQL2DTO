@@ -1,4 +1,4 @@
-using Logic.Interface;
+using Interface;
 using System;
 using System.Text;
 using System.Linq;
@@ -24,7 +24,7 @@ namespace GenerateCS.Templates
         /// <summary>
         /// ファイル名
         /// </summary>
-        public string FileName { get { return GetCSName(table.Name); } }
+        public string FileName { get { return $"{GetCSName(table.Name)}.cs"; } }
 
         /// <summary>
         /// テーブル名やカラム名からC#用名称を取得

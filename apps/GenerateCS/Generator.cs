@@ -1,4 +1,4 @@
-using Logic.Interface;
+using Interface;
 using System;
 using System.IO;
 using System.Text;
