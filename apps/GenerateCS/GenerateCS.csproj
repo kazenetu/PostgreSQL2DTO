@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <!-- T4toCSが未ビルドの場合はビルド -->
-  <Target Name="CreateTool" BeforeTargets="TextTemplateTransform" Condition="!Exists('../Lib/T4toCS/bin/*.dll')">
+  <Target Name="CreateTool" BeforeTargets="TextTemplateTransform" Condition="!Exists('../Lib/T4toCS/bin/T4toCS.dll')">
       <Exec WorkingDirectory="../Lib/T4toCS" Command="dotnet build" />
   </Target>
 
