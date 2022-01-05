@@ -52,7 +52,7 @@ namespace t4_practice
         static string T4toClassMethod(string templateName, string nameSpaceName, string className)
         {
             // T4ファイルを取得、変換して文字列として返す
-            var templateFile = RemoveParams(File.ReadAllText(templateName));
+            var templateFile = RemoveParams(File.ReadAllText(templateName).Replace("\n", string.Empty));
             return CreateTransformText(templateFile);
 
             // 不要な設定を削除
