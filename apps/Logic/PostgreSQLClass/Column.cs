@@ -1,5 +1,5 @@
 using System;
-using Logic.Interface;
+using Interface;
 
 namespace Logic.PostgreSQLClass
 {

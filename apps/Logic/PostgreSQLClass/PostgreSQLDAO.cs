@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
-using Logic.Interface;
+using Interface;
 using Npgsql;
 
 namespace Logic.PostgreSQLClass
