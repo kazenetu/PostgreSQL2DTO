@@ -29,7 +29,7 @@ namespace GenerateCS
             {
                 // C#ソースコードを取得
                 var createCS = new Templates.CreateCS(table);
-                var csSource = createCS.TransformText();
+                var csSource = ((ITransformText)createCS).TransformText();
 
                 // ファイル出力
                 var filePath = Path.Combine(outputPath, createCS.FileName);
