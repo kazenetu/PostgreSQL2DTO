@@ -1,5 +1,6 @@
 ﻿using System;
 using Logic.PostgreSQLClass;
+using GenerateCS;
 
 namespace Logic
 {
@@ -28,14 +29,11 @@ namespace Logic
         {
             var tables = new PostgreSQLDAO().GetTables(hostName, userID, password, database, port);
 
-            // 仮実装：コンソール出力
+            // HACK ファイル出力
+            var outputPath = "CSOutputs";
             foreach (var table in tables)
             {
-                Console.WriteLine($"{table.Comment}[{table.Name}]");
-                foreach (var column in table.Columns)
-                {
-                    Console.WriteLine($"\t{column.DataType}\t\t{column.Comment}[{column.Name}]");
-                }
+                Generator.Generate(table, outputPath);
             }
         }
     }

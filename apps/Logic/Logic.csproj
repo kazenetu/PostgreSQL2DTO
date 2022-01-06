@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../Interface/Interface.csproj" />
+    <ProjectReference Include="../GenerateCS/GenerateCS.csproj" />
   </ItemGroup>
 
 </Project>
