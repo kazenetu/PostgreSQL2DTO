@@ -11,5 +11,5 @@ PostgreSQLのテーブル情報を取得し、C#のDTOクラスを作成する�
 * ローカル実行  
     dotnet runで実行する。  
     ```sh
-    dotnet run --project ./console/console.csproj [DBサーバー(サーバ名やIPアドレス))] [ユーザーID] [パスワード] [データベース名] [ポート番号(省略可)]
+    dotnet run --project ./console/console.csproj [ファイル出力先] [DBサーバー(サーバ名やIPアドレス))] [ユーザーID] [パスワード] [データベース名] [ポート番号(省略可)]
     ```  

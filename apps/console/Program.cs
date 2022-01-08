@@ -7,29 +7,22 @@ namespace console
     {
         static void Main(string[] args)
         {
-            string hostName;
-            string userID;
-            string password;
-            string database;
             if (args.Length < 4)
             {
-                Console.WriteLine("Input parameters \"ServerName UserID Password DatabaseName [portNo]\"");
+                Console.WriteLine("Input parameters \"OutputPath ServerName UserID Password DatabaseName [portNo]\"");
                 return;
             }
-            hostName = args[0];
-            userID = args[1];
-            password = args[2];
-            database = args[3];
-            if (args.Length > 4)
+            var outputPath = args[0];
+            var hostName = args[1];
+            var userID = args[2];
+            var password = args[3];
+            var database = args[4];
+            int port = 5432;
+            if (args.Length > 5)
             {
-                var port = int.Parse(args[4]);
-                Entry.CreateSources(hostName, userID, password, database, port);
+                port = int.Parse(args[4]);
             }
-            else{
-                Entry.CreateSources(hostName, userID, password, database);
-            }
-
-
+            Entry.CreateSources(outputPath, hostName, userID, password, database, port);
         }
     }
 }
