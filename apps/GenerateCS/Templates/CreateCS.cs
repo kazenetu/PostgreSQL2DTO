@@ -41,16 +41,18 @@ namespace GenerateCS.Templates
         /// C#コメントの取得
         /// </summary>
         /// <param name="comment">DBから取得したテーブルやカラムのコメント</param>
+        /// <param name="indent">スペースインデント</param>
         /// <returns></returns>
-        private string GetCSComment(string comment)
+        private string GetCSComment(string comment,string indent = "")
         {
             var result = new StringBuilder();
             var comments = comment.Replace("\r", string.Empty).Split("\n");
             if (comments.Any())
             {
-                result.AppendLine($"/// <summary>");
-                result.AppendLine(string.Join(Environment.NewLine, comments.Select(text => { return $"/// {text}"; })));
-                result.AppendLine($"/// </summary>");
+                result.AppendLine();
+                result.AppendLine($"{indent}/// <summary>");
+                result.AppendLine(string.Join(Environment.NewLine, comments.Select(text => { return $"{indent}/// {text}"; })));
+                result.Append($"{indent}/// </summary>");
             }
             return result.ToString();
         }

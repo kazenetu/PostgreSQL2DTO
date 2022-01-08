@@ -6,19 +6,21 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 
-<#= GetCSComment(table.Name) #>
+<#= GetCSComment(table.Comment) #>
 public class <#= GetCSName(table.Name) #>
 {
     public <#= GetCSName(table.Name) #>()
     {
-        <# 
-        foreach(var column in table.Columns)
-        {
-        #>
-            <#= GetCSComment(column.Name) #>
-            public <#= column.DataType #> <#= GetCSName(column.Name) #> {set; get;}
-        <# 
-        }
-        #>
     }
+
+    <# 
+    foreach(var column in table.Columns)
+    {
+    #>
+    <#= GetCSComment(column.Comment, "    ") #>
+    public <#= column.DataType #> <#= GetCSName(column.Name) #> {set; get;}
+
+    <# 
+    }
+    #>
 }
