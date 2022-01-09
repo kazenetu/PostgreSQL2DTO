@@ -25,23 +25,16 @@ namespace GenerateCS
         /// <param name="outputPath">出力ディレクトリパス</param>
         public static void Generate(ITable table, string outputPath)
         {
-            try
-            {
-                // C#ソースコードを取得
-                var createCS = new Templates.CreateCS(table);
-                var csSource = ((ITransformText)createCS).TransformText();
+            // C#ソースコードを取得
+            var createCS = new Templates.CreateCS(table);
+            var csSource = ((ITransformText)createCS).TransformText();
 
-                // ファイル出力
-                var filePath = Path.Combine(outputPath, createCS.FileName);
-                using (FileStream fs = File.OpenWrite(filePath))
-                {
-                    Byte[] info = new UTF8Encoding(true).GetBytes(csSource);
-                    fs.Write(info, 0, info.Length);
-                }
-            }
-            catch (Exception ex)
+            // ファイル出力
+            var filePath = Path.Combine(outputPath, createCS.FileName);
+            using (FileStream fs = File.OpenWrite(filePath))
             {
-                throw ex;
+                Byte[] info = new UTF8Encoding(true).GetBytes(csSource);
+                fs.Write(info, 0, info.Length);
             }
         }
     }
