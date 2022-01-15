@@ -45,7 +45,7 @@ PostgreSQLのテーブル情報を取得し、C#のDTOクラスを作成する�
       1. コンテナ内で実行 
           1. dotnet runで実行する。
               ```sh
-              dotnet run --project ./console/console.csproj ./CSOutputs postgresql_server test test testDB
+              dotnet run --project ./apps/console/console.csproj ./apps/CSOutputs postgresql_server test test testDB
               ```
 
           1. コンテナから離脱する。
