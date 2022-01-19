@@ -1,7 +1,7 @@
 using Interface;
 using System;
-using System.Text;
 using System.Linq;
+using System.Text;
 
 namespace GenerateCS.Templates
 {
@@ -43,7 +43,7 @@ namespace GenerateCS.Templates
         /// <param name="comment">DBから取得したテーブルやカラムのコメント</param>
         /// <param name="indent">スペースインデント</param>
         /// <returns></returns>
-        private string GetCSComment(string comment,string indent = "")
+        private string GetCSComment(string comment, string indent = "")
         {
             var result = new StringBuilder();
             var comments = comment.Replace("\r", string.Empty).Split("\n");

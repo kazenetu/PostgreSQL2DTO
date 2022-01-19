@@ -1,5 +1,3 @@
-using System;
-
 namespace Interface
 {
     /// <summary>
@@ -7,20 +5,20 @@ namespace Interface
     /// </summary>
     public interface IColumn
     {
-        /// <summary>
-        /// カラム名
-        /// </summary>
-        string Name { get; }
+      /// <summary>
+      /// カラム名
+      /// </summary>
+      string Name { get; }
 
-        /// <summary>
-        /// データ型
-        /// </summary>
-        string DataType { get; }
+      /// <summary>
+      /// データ型
+      /// </summary>
+      string DataType { get; }
 
-        /// <summary>
-        /// コメント
-        /// </summary>
-        string Comment { get; }
+      /// <summary>
+      /// コメント
+      /// </summary>
+      string Comment { get; }
     }
 
 }

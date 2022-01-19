@@ -1,9 +1,6 @@
 <#@ template language="C#" linePragmas="false" #>
 <#@ assembly name="System.Core" #>
-<#@ import namespace="Interface" #>
-<#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
-<#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 
 <#= GetCSComment(table.Comment) #>

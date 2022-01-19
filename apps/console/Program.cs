@@ -1,5 +1,5 @@
-﻿using System;
-using Logic;
+﻿using Logic;
+using System;
 
 namespace console
 {
