@@ -79,6 +79,7 @@ namespace t4_practice
                 result.AppendLine("       var template = new StringBuilder();");
 
                 // メソッド内部の組み立て
+                var indentIndex = 0;
                 var type = Type.None;
                 var templates = RemoveImport(templateFile).Split('\n');
                 foreach(var line in templates)
@@ -94,7 +95,8 @@ namespace t4_practice
                             var oneLineCodeReg = "<# (.+?) #>";
                             if(Regex.Matches(outputLine, oneLineCodeReg).Count > 0)
                             {
-                                result.AppendLine($"{GetRegex(outputLine,oneLineCodeReg,"$1")}");
+                                result.Append(new string(' ',indentIndex*2));
+                                result.AppendLine($"   {GetRegex(outputLine,oneLineCodeReg,"$1")}");
                                 continue;
                             }
 
@@ -112,7 +114,16 @@ namespace t4_practice
                             }
                             else
                             {
-                                result.AppendLine($"{outputLine}");
+                                if(outputLine.IndexOf("}")>0){
+                                    indentIndex--;
+                                }
+
+                                result.Append(new string(' ',indentIndex*2));
+                                result.AppendLine($"   {outputLine}");
+
+                                if(outputLine.IndexOf("{")>0){
+                                    indentIndex++;
+                                }
                             }
                             continue;
                     }
@@ -125,6 +136,7 @@ namespace t4_practice
                     {
                         outputLine = outputLine.Replace("{", "{{").Replace("}", "}}");
                     }
+                    result.Append(new string(' ',indentIndex*2));
                     result.AppendLine($"       template.AppendLine($\"{outputLine}\");");
                 }
 
