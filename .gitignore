@@ -351,3 +351,6 @@ MigrationBackup/
 
 # T4 Generated Files
 **/templates/*.Generated.cs
+
+# Output CS Directory
+CSOutputs/
