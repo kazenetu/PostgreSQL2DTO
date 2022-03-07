@@ -19,7 +19,18 @@ namespace GenerateCS.Templates
     /// コンストラクタ
     /// </summary>
     /// <param name="table">作成対象テーブル情報</param>
-    public CreateCS(ITable table) { this.table = table; }
+    /// <param name="nameSpace">作成対象クラスのnamespace</param>
+    public CreateCS(ITable table, string nameSpace="Test")
+    { 
+      this.table = table;
+      NameSpace = nameSpace;
+    }
+
+    /// <summary>
+    /// namespace
+    /// </summary>
+    public string NameSpace{private set; get;}
+
 
     /// <summary>
     /// ファイル名
