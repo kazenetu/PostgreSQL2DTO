@@ -19,7 +19,18 @@ namespace GenerateCS.Templates
     /// コンストラクタ
     /// </summary>
     /// <param name="table">作成対象テーブル情報</param>
-    public CreateCS(ITable table) { this.table = table; }
+    /// <param name="nameSpace">作成対象クラスのnamespace</param>
+    public CreateCS(ITable table, string nameSpace = "Test")
+    {
+      this.table = table;
+      NameSpace = nameSpace;
+    }
+
+    /// <summary>
+    /// namespace
+    /// </summary>
+    public string NameSpace { private set; get; }
+
 
     /// <summary>
     /// ファイル名
@@ -42,15 +53,25 @@ namespace GenerateCS.Templates
     /// </summary>
     /// <param name="comment">DBから取得したテーブルやカラムのコメント</param>
     /// <param name="indent">スペースインデント</param>
+    /// <param name="addBlankLine">空行を追加するか</param>
     /// <returns></returns>
-    private string GetCSComment(string comment, string indent = "")
+    private string GetCSComment(string comment, string indent = "", bool addBlankLine = true)
     {
       var result = new StringBuilder();
       var comments = comment.Replace("\r", string.Empty).Split("\n");
       if (comments.Any())
       {
-        result.AppendLine();
-        result.AppendLine($"{indent}/// <summary>");
+        if (addBlankLine)
+        {
+          // 空行を挟むため、T4テンプレート上のインデントは無効になる
+          result.AppendLine();
+          result.AppendLine($"{indent}/// <summary>");
+        }
+        else
+        {
+          // 空行なしの場合、1行目のみT4テンプレートのインデントを活用する
+          result.AppendLine($"/// <summary>");
+        }
         result.AppendLine(string.Join(Environment.NewLine, comments.Select(text => { return $"{indent}/// {text}"; })));
         result.Append($"{indent}/// </summary>");
       }

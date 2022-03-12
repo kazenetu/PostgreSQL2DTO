@@ -23,10 +23,11 @@ namespace GenerateCS
     /// </summary>
     /// <param name="table">DBテーブル情報</param>
     /// <param name="outputPath">出力ディレクトリパス</param>
-    public static void Generate(ITable table, string outputPath)
+    /// <param name="nameSpace">namespace</param>
+    public static void Generate(ITable table, string outputPath, string nameSpace)
     {
       // C#ソースコードを取得
-      var createCS = new Templates.CreateCS(table);
+      var createCS = new Templates.CreateCS(table, nameSpace);
       var csSource = ((ITransformText)createCS).TransformText();
 
       // ファイル出力
