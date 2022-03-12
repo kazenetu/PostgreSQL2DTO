@@ -11,7 +11,7 @@ PostgreSQLのテーブル情報を取得し、C#のDTOクラスを作成する�
 * ローカル実行  
     dotnet runで実行する。  
     ```sh
-    dotnet run --project ./apps/console/console.csproj [ファイル出力先] [DBサーバー(サーバ名やIPアドレス))] [ユーザーID] [パスワード] [データベース名] [ポート番号(省略可)]
+    dotnet run --project ./apps/console/console.csproj [NameSpace] [ファイル出力先] [DBサーバー(サーバ名やIPアドレス))] [ユーザーID] [パスワード] [データベース名] [ポート番号(省略可)]
     ```  
     ※具体的な内容は「Dockerコンテナでの実行」を参照
 
@@ -45,7 +45,7 @@ PostgreSQLのテーブル情報を取得し、C#のDTOクラスを作成する�
       1. コンテナ内で実行 
           1. dotnet runで実行する。
               ```sh
-              dotnet run --project ./apps/console/console.csproj CSOutputs postgresql_server test test testDB
+              dotnet run --project ./apps/console/console.csproj DB.Dto CSOutputs postgresql_server test test testDB
               ```
 
           1. コンテナから離脱する。
