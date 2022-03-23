@@ -350,7 +350,7 @@ MigrationBackup/
 .ionide/
 
 # T4 Generated Files
-**/templates/*.Generated.cs
+**/Templates/*.Generated.cs
 
 # Output CS Directory
 CSOutputs/
