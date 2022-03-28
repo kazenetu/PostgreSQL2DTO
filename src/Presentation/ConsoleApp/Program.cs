@@ -32,14 +32,27 @@ namespace Presentation.ConsoleApp
         port = int.Parse(args[5]);
       }
 
-      // Appication呼び出し
-      var inputParamModel = new InputParamModel(nameSpace, outputPath, hostName, userID, password, database, port);
-      var messages = new GenerateCSApplicationService().GenerateCSFileFromDB(inputParamModel).Messages;
-
-      // ファイル生成結果を取得
-      foreach (var message in messages)
+      try
       {
-        Console.WriteLine(message);
+        // Appication呼び出し
+        var inputParamModel = new InputParamModel(nameSpace, outputPath, hostName, userID, password, database, port);
+        var messages = new GenerateCSApplicationService().GenerateCSFileFromDB(inputParamModel).Messages;
+
+        // ファイル生成結果を取得
+        foreach (var message in messages)
+        {
+          Console.WriteLine(message);
+        }
+      }
+      catch (ExceptionModel exceptionModel)
+      {
+        Console.WriteLine("---Exception!!---");
+        Console.WriteLine(exceptionModel);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine("---Exception!!---");
+        Console.WriteLine(new ExceptionModel(ex));
       }
     }
   }
