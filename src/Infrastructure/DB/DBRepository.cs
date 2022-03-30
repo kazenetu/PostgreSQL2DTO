@@ -1,9 +1,12 @@
-using Npgsql;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Domain.Classes;
 using Domain.DB;
+using Domain.Exceptions;
+using Npgsql;
+using System;
+using System.Collections.Generic;
+using System.Net.Sockets;
+using System.Linq;
+using System.Text;
 
 namespace Infrastructure.DB
 {
@@ -34,7 +37,17 @@ namespace Infrastructure.DB
       var connectionString = $"Server={parameterEntity.HostName};Port={parameterEntity.Port};User Id={parameterEntity.UserID};Password={parameterEntity.Password};Database={parameterEntity.Database}";
 
       // テーブルリストを取得
-      var tables = GetTables(connectionString);
+      List<Table> tables;
+      try
+      {
+        tables = GetTables(connectionString);
+      }
+      catch (SocketException socketException)
+      {
+        var exceptionMessages = new List<DomainExceptionMessage>();
+        exceptionMessages.Add(new DomainExceptionMessage($"{connectionString}", DomainExceptionMessage.ExceptionType.DBError));
+        throw new DomainException(exceptionMessages.AsReadOnly(), socketException);
+      }
 
       // クラスエンティティリスト作成
       var result = new List<ClassEntity>();
