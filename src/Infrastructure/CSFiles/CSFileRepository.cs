@@ -1,5 +1,6 @@
 using Domain.Classes;
 using Domain.CSFiles;
+using Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,20 +23,34 @@ namespace Infrastructure.CSFiles
     /// <returns>出力ファイル名リスト</returns>
     public ReadOnlyCollection<string> Generate(List<ClassEntity> classEntities, FileDataEntity fileDataEntity)
     {
+      // パラメーターチェック
+      var exceptionMessages = new List<DomainExceptionMessage>();
+      if (classEntities.Count == 0) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(classEntities)}[{classEntities}]", DomainExceptionMessage.ExceptionType.Empty));
+      if (fileDataEntity is null) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(fileDataEntity)}[{fileDataEntity}]", DomainExceptionMessage.ExceptionType.Empty));
+      if (exceptionMessages.Count > 0) throw new DomainException(exceptionMessages.AsReadOnly());
+
       var result = new List<string>();
-
-      foreach(var classEntity in classEntities)
+      try
       {
-        var createCS = new CreateCS(classEntity, fileDataEntity.NameSpace);
-        var filePath = Path.Combine(fileDataEntity.OutputPath, createCS.FileName);
+        foreach (var classEntity in classEntities)
+        {
+          var createCS = new CreateCS(classEntity, fileDataEntity.NameSpace);
+          var filePath = Path.Combine(fileDataEntity.OutputPath, createCS.FileName);
 
-        // ファイル出力
-        var message = new StringBuilder();
-        message.Append($"  >>{classEntity.Name}... ");
-        CreateFile(createCS,filePath,fileDataEntity.NameSpace);
-        message.AppendLine("finish");
+          // ファイル出力
+          var message = new StringBuilder();
+          message.Append($"  >>{classEntity.Name}... ");
+          CreateFile(createCS, filePath, fileDataEntity.NameSpace);
+          message.AppendLine("finish");
 
-        result.Add(message.ToString());
+          result.Add(message.ToString());
+        }
+      }
+      catch (System.Exception ex)
+      {
+        var messages = new List<DomainExceptionMessage>();
+        messages.Add(new DomainExceptionMessage($"{ex.Message}", DomainExceptionMessage.ExceptionType.FileOutputError));
+        throw new DomainException(messages.AsReadOnly(), ex);
       }
 
       return result.AsReadOnly();
@@ -47,7 +62,7 @@ namespace Infrastructure.CSFiles
     /// <param name="createCS">C#ソースコード生成クラス</param>
     /// <param name="filePath">C#ファイルパス</param>
     /// <param name="nameSpace">名前空間</param>
-    private void CreateFile(CreateCS createCS,string filePath,string nameSpace)
+    private void CreateFile(CreateCS createCS, string filePath, string nameSpace)
     {
       var csSource = ((ITransformText)createCS).TransformText();
 

@@ -1,3 +1,6 @@
+using Domain.Exceptions;
+using System.Collections.Generic;
+
 namespace Domain.Classes
 {
   /// <summary>
@@ -39,6 +42,13 @@ namespace Domain.Classes
     /// <returns>プロパティエンティティ インスタンス</returns>
     public static PropertyEntity Create(string name, string typeName, string comment)
     {
+      // パラメーターチェック
+      var exceptionMessages = new List<DomainExceptionMessage>();
+      if (string.IsNullOrEmpty(name)) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(name)}[{name}]", DomainExceptionMessage.ExceptionType.Empty));
+      if (string.IsNullOrEmpty(typeName)) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(typeName)}[{typeName}]", DomainExceptionMessage.ExceptionType.Empty));
+      if (string.IsNullOrEmpty(comment)) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(comment)}[{comment}]", DomainExceptionMessage.ExceptionType.Empty));
+      if (exceptionMessages.Count > 0) throw new DomainException(exceptionMessages.AsReadOnly());
+
       return new PropertyEntity()
       {
         Name = name,
