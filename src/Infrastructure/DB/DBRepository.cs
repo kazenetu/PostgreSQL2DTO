@@ -42,11 +42,11 @@ namespace Infrastructure.DB
       {
         tables = GetTables(connectionString);
       }
-      catch (SocketException socketException)
+      catch (Exception exception)
       {
         var exceptionMessages = new List<DomainExceptionMessage>();
         exceptionMessages.Add(new DomainExceptionMessage($"{connectionString}", DomainExceptionMessage.ExceptionType.DBError));
-        throw new DomainException(exceptionMessages.AsReadOnly(), socketException);
+        throw new DomainException(exceptionMessages.AsReadOnly(), exception);
       }
 
       // クラスエンティティリスト作成
