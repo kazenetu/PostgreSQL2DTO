@@ -64,12 +64,12 @@ namespace PostgreSQL2DTOTest.Shared
       var result = new List<Table>();
       Table tempTable = null;
 
-      tempTable = new Table("マスタテーブル", "m_test");
+      tempTable = new Table("m_test", "マスタテーブル");
       tempTable.Columns.Add(new Column("int", "integer", "intになる"));
       tempTable.Columns.Add(new Column("Date", "date", "Dateになる"));
       result.Add(tempTable);
 
-      tempTable = new Table("テストテーブル", "t_test");
+      tempTable = new Table("t_test", "テストテーブル");
       tempTable.Columns.Add(new Column("String", "string", "stringになる"));
       result.Add(tempTable);
 
