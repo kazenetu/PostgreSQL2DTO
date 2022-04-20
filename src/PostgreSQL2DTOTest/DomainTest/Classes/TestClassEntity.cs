@@ -67,7 +67,7 @@ namespace PostgreSQL2DTOTest.Domain.Classes
       var properties = GetMockProperty();
 
       var ex = Assert.ThrowsAny<DomainException>(() => ClassEntity.Create(name, comment, properties.AsReadOnly()));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
 
       Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
       Assert.Equal("name[]", ex.MessageIds[0].Target);
@@ -81,7 +81,7 @@ namespace PostgreSQL2DTOTest.Domain.Classes
       var properties = GetMockProperty();
 
       var ex = Assert.ThrowsAny<DomainException>(() => ClassEntity.Create(name, comment, properties.AsReadOnly()));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
 
       Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
       Assert.Equal("comment[]", ex.MessageIds[0].Target);
@@ -95,7 +95,7 @@ namespace PostgreSQL2DTOTest.Domain.Classes
       var properties = new List<PropertyEntity>();
 
       var ex = Assert.ThrowsAny<DomainException>(() => ClassEntity.Create(name, comment, properties.AsReadOnly()));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
 
       Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
       Assert.Equal($"properties[{properties.AsReadOnly()}]", ex.MessageIds[0].Target);

@@ -63,7 +63,7 @@ namespace PostgreSQL2DTOTest.Domain.DB
       int? port = 0;
 
       var ex = Assert.ThrowsAny<DomainException>(() => DBParameterEntity.Create(hostName, userID, password, database, port));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
 
       Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
       Assert.Equal("hostName[]", ex.MessageIds[0].Target);
@@ -79,7 +79,7 @@ namespace PostgreSQL2DTOTest.Domain.DB
       int? port = 0;
 
       var ex = Assert.ThrowsAny<DomainException>(() => DBParameterEntity.Create(hostName, userID, password, database, port));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
 
       Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
       Assert.Equal("userID[]", ex.MessageIds[0].Target);
@@ -95,7 +95,7 @@ namespace PostgreSQL2DTOTest.Domain.DB
       int? port = 0;
 
       var ex = Assert.ThrowsAny<DomainException>(() => DBParameterEntity.Create(hostName, userID, password, database, port));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
 
       Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
       Assert.Equal("password[]", ex.MessageIds[0].Target);
@@ -111,7 +111,7 @@ namespace PostgreSQL2DTOTest.Domain.DB
       int? port = 0;
 
       var ex = Assert.ThrowsAny<DomainException>(() => DBParameterEntity.Create(hostName, userID, password, database, port));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
 
       Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
       Assert.Equal("database[]", ex.MessageIds[0].Target);
@@ -127,7 +127,7 @@ namespace PostgreSQL2DTOTest.Domain.DB
       int? port = null;
 
       var ex = Assert.ThrowsAny<DomainException>(() => DBParameterEntity.Create(hostName, userID, password, database, port));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
 
       Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
       Assert.Equal("port[]", ex.MessageIds[0].Target);

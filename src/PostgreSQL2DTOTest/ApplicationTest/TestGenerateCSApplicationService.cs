@@ -37,7 +37,7 @@ namespace PostgreSQL2DTOTest.ApplicationTest
     public void ExceptionParamNull()
     {
       var ex = Assert.ThrowsAny<DomainException>(() => applicationService.GenerateCSFileFromDB(null));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
       Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
       Assert.Equal("inputParamModel[]", ex.MessageIds[0].Target);
     }

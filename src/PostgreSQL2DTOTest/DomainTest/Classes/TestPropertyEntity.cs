@@ -53,7 +53,7 @@ namespace PostgreSQL2DTOTest.Domain.Classes
       string comment = "コメント";
 
       var ex = Assert.ThrowsAny<DomainException>(() => PropertyEntity.Create(name, typeName, comment));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
 
       Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
       Assert.Equal("name[]", ex.MessageIds[0].Target);
@@ -67,7 +67,7 @@ namespace PostgreSQL2DTOTest.Domain.Classes
       string comment = "コメント";
 
       var ex = Assert.ThrowsAny<DomainException>(() => PropertyEntity.Create(name, typeName, comment));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
 
       Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
       Assert.Equal("typeName[]", ex.MessageIds[0].Target);
@@ -81,7 +81,7 @@ namespace PostgreSQL2DTOTest.Domain.Classes
       string comment = null;
 
       var ex = Assert.ThrowsAny<DomainException>(() => PropertyEntity.Create(name, typeName, comment));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
 
       Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
       Assert.Equal("comment[]", ex.MessageIds[0].Target);
