@@ -85,8 +85,8 @@ namespace PostgreSQL2DTOTest.InfrastructureTest
 
       var fileNames = Directory.GetFiles(fileDataEntity.OutputPath).OrderBy(filename => filename).ToList();
       Assert.Equal(2, fileNames.Count);
-      Assert.Equal($"{fileDataEntity.OutputPath}/MTest.cs", fileNames[0]);
-      Assert.Equal($"{fileDataEntity.OutputPath}/TTest.cs", fileNames[1]);
+      Assert.Equal($"{fileDataEntity.OutputPath}{Path.DirectorySeparatorChar}MTest.cs", fileNames[0]);
+      Assert.Equal($"{fileDataEntity.OutputPath}{Path.DirectorySeparatorChar}TTest.cs", fileNames[1]);
     }
   }
 }
