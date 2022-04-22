@@ -1,6 +1,5 @@
 using Domain.DB;
 using Domain.Exceptions;
-using System.Collections.Generic;
 using System;
 using Xunit;
 

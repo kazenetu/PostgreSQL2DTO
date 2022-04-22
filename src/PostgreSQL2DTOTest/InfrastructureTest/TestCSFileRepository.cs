@@ -57,7 +57,7 @@ namespace PostgreSQL2DTOTest.InfrastructureTest
       var fileDataEntity = FileDataEntity.Create("DB.Dto", "CSOutputs");
 
       var ex = Assert.ThrowsAny<DomainException>(() => repository.Generate(classEntities, fileDataEntity));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
     }
 
     [Fact, Trait("Category", "InfrastructureTest")]
@@ -68,7 +68,7 @@ namespace PostgreSQL2DTOTest.InfrastructureTest
       FileDataEntity fileDataEntity = null;
 
       var ex = Assert.ThrowsAny<DomainException>(() => repository.Generate(classEntities, fileDataEntity));
-      Assert.Equal(1, ex.MessageIds.Count);
+      Assert.Single(ex.MessageIds);
     }
 
     [Fact, Trait("Category", "InfrastructureTest")]

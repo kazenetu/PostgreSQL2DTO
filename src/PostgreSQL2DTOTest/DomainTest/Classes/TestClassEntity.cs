@@ -1,10 +1,10 @@
 using Domain.Classes;
-using Domain.Exceptions;
 using Domain.DB;
+using Domain.Exceptions;
 using PostgreSQL2DTOTest.Shared;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace PostgreSQL2DTOTest.Domain.Classes

@@ -1,4 +1,3 @@
-using Domain.Classes;
 using Domain.DB;
 using Domain.Exceptions;
 using Infrastructure.DB;

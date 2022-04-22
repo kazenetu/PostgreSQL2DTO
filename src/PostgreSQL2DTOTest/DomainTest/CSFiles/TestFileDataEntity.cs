@@ -1,6 +1,5 @@
-using Domain.Exceptions;
 using Domain.CSFiles;
-using System.Collections.Generic;
+using Domain.Exceptions;
 using System;
 using Xunit;
 
