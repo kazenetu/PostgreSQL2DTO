@@ -36,7 +36,7 @@ namespace PostgreSQL2DTOTest.Domain.Classes
     {
       var mockDBRepository = new MockDBRepository();
       var entities = mockDBRepository.GetClasses(DBParameterEntity.Create("HostName", "UserID", "Password", "Database", 0));
-      return entities.Where(entity => entity.Name=="m_test").FirstOrDefault()?.Properties.ToList();
+      return entities.Where(entity => entity.Name == "m_test").FirstOrDefault()?.Properties.ToList();
     }
 
     [Fact]
