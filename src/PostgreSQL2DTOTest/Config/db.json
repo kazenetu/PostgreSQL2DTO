@@ -1,0 +1,7 @@
+{
+  "HostName":"postgresql_server",
+  "UserID":"test",
+  "Password":"test",
+  "Database":"testDB",
+  "Port":5432
+}
