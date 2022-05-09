@@ -1,5 +1,6 @@
 using Domain.DB;
 using Domain.Exceptions;
+using System.Collections.Generic;
 using System;
 using Xunit;
 
@@ -34,22 +35,22 @@ namespace PostgreSQL2DTOTest.Domain.DB
       int? port = null;
 
       var ex = Assert.ThrowsAny<DomainException>(() => DBParameterEntity.Create(hostName, userID, password, database, port));
-      Assert.Equal(5, ex.MessageIds.Count);
+      Assert.Equal(5, ex.Messages.Count);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
-      Assert.Equal("hostName[]", ex.MessageIds[0].Target);
+      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[0].MessageID);
+      Assert.Equal("hostName[]", ex.Messages[0].Target);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[1].MessageID);
-      Assert.Equal("userID[]", ex.MessageIds[1].Target);
+      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[1].MessageID);
+      Assert.Equal("userID[]", ex.Messages[1].Target);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[2].MessageID);
-      Assert.Equal("password[]", ex.MessageIds[2].Target);
+      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[2].MessageID);
+      Assert.Equal("password[]", ex.Messages[2].Target);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[3].MessageID);
-      Assert.Equal("database[]", ex.MessageIds[3].Target);
+      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[3].MessageID);
+      Assert.Equal("database[]", ex.Messages[3].Target);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[4].MessageID);
-      Assert.Equal("port[]", ex.MessageIds[4].Target);
+      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[4].MessageID);
+      Assert.Equal("port[]", ex.Messages[4].Target);
     }
 
     [Fact]
@@ -62,10 +63,10 @@ namespace PostgreSQL2DTOTest.Domain.DB
       int? port = 0;
 
       var ex = Assert.ThrowsAny<DomainException>(() => DBParameterEntity.Create(hostName, userID, password, database, port));
-      Assert.Single(ex.MessageIds);
+      Assert.Single(ex.Messages);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
-      Assert.Equal("hostName[]", ex.MessageIds[0].Target);
+      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[0].MessageID);
+      Assert.Equal("hostName[]", ex.Messages[0].Target);
     }
 
     [Fact]
@@ -78,10 +79,10 @@ namespace PostgreSQL2DTOTest.Domain.DB
       int? port = 0;
 
       var ex = Assert.ThrowsAny<DomainException>(() => DBParameterEntity.Create(hostName, userID, password, database, port));
-      Assert.Single(ex.MessageIds);
+      Assert.Single(ex.Messages);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
-      Assert.Equal("userID[]", ex.MessageIds[0].Target);
+      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[0].MessageID);
+      Assert.Equal("userID[]", ex.Messages[0].Target);
     }
 
     [Fact]
@@ -94,10 +95,10 @@ namespace PostgreSQL2DTOTest.Domain.DB
       int? port = 0;
 
       var ex = Assert.ThrowsAny<DomainException>(() => DBParameterEntity.Create(hostName, userID, password, database, port));
-      Assert.Single(ex.MessageIds);
+      Assert.Single(ex.Messages);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
-      Assert.Equal("password[]", ex.MessageIds[0].Target);
+      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[0].MessageID);
+      Assert.Equal("password[]", ex.Messages[0].Target);
     }
 
     [Fact]
@@ -110,10 +111,10 @@ namespace PostgreSQL2DTOTest.Domain.DB
       int? port = 0;
 
       var ex = Assert.ThrowsAny<DomainException>(() => DBParameterEntity.Create(hostName, userID, password, database, port));
-      Assert.Single(ex.MessageIds);
+      Assert.Single(ex.Messages);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
-      Assert.Equal("database[]", ex.MessageIds[0].Target);
+      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[0].MessageID);
+      Assert.Equal("database[]", ex.Messages[0].Target);
     }
 
     [Fact]
@@ -126,10 +127,10 @@ namespace PostgreSQL2DTOTest.Domain.DB
       int? port = null;
 
       var ex = Assert.ThrowsAny<DomainException>(() => DBParameterEntity.Create(hostName, userID, password, database, port));
-      Assert.Single(ex.MessageIds);
+      Assert.Single(ex.Messages);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.MessageIds[0].MessageID);
-      Assert.Equal("port[]", ex.MessageIds[0].Target);
+      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[0].MessageID);
+      Assert.Equal("port[]", ex.Messages[0].Target);
     }
 
     [Fact]
