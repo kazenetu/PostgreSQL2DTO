@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="../../../NET6/Presentation/ConsoleApp/**/*.cs" Exclude="../../../NET6/Presentation/ConsoleApp/obj/**/*.cs"/>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="../../Lib/TinyDIContainer/TinyDIContainer.csproj" />
     <ProjectReference Include="../../Infrastructure/Infrastructure.csproj" />
     <ProjectReference Include="../../Application/Application.csproj" />
