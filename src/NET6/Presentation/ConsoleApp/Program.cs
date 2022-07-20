@@ -11,7 +11,7 @@ namespace Presentation.ConsoleApp
       if (args.Length < 6)
       {
         Console.WriteLine();
-        Console.WriteLine("Input parameters! \"NameSpace OutputPath ServerName UserID Password DatabaseName [portNo]\"");
+        Console.WriteLine("Input parameters! \"NameSpace OutputPath ServerName UserID Password DatabaseName [portNo] ['useSnakeCase']\"");
         Console.WriteLine();
         return;
       }
@@ -27,15 +27,22 @@ namespace Presentation.ConsoleApp
       var password = args[4];
       var database = args[5];
       int port = 5432;
+      var useSnakeCase = false;
+
       if (args.Length > 6)
       {
         port = int.Parse(args[5]);
+      }
+      if(args.Length >= 7 && args[6] == "useSnakeCase")
+      {
+        useSnakeCase = true;
       }
 
       try
       {
         // Appication呼び出し
-        var inputParamModel = new InputParamModel(nameSpace, outputPath, hostName, userID, password, database, port);
+        useSnakeCase = true;
+        var inputParamModel = new InputParamModel(nameSpace, outputPath, useSnakeCase, hostName, userID, password, database, port);
         var messages = new GenerateCSApplicationService().GenerateCSFileFromDB(inputParamModel).Messages;
 
         // ファイル生成結果を取得
