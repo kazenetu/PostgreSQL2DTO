@@ -44,9 +44,10 @@ namespace PostgreSQL2DTOTest.InfrastructureTest
     public void ExceptionAllNG()
     {
       var classEntities = new List<ClassEntity>();
+      var useSnakeCase = false;
       FileDataEntity fileDataEntity = null;
 
-      var ex = Assert.ThrowsAny<DomainException>(() => repository.Generate(classEntities, fileDataEntity));
+      var ex = Assert.ThrowsAny<DomainException>(() => repository.Generate(classEntities, fileDataEntity, useSnakeCase));
       Assert.Equal(2, ex.Messages.Count);
     }
 
@@ -55,8 +56,9 @@ namespace PostgreSQL2DTOTest.InfrastructureTest
     {
       var classEntities = new List<ClassEntity>();
       var fileDataEntity = FileDataEntity.Create("DB.Dto", "CSOutputs");
+      var useSnakeCase = false;
 
-      var ex = Assert.ThrowsAny<DomainException>(() => repository.Generate(classEntities, fileDataEntity));
+      var ex = Assert.ThrowsAny<DomainException>(() => repository.Generate(classEntities, fileDataEntity, useSnakeCase));
       Assert.Single(ex.Messages);
     }
 
@@ -65,9 +67,10 @@ namespace PostgreSQL2DTOTest.InfrastructureTest
     {
       var mockDBRepository = new MockDBRepository();
       var classEntities = mockDBRepository.GetClasses(DBParameterEntity.Create("HostName", "UserID", "Password", "Database", 0));
+      var useSnakeCase = false;
       FileDataEntity fileDataEntity = null;
 
-      var ex = Assert.ThrowsAny<DomainException>(() => repository.Generate(classEntities, fileDataEntity));
+      var ex = Assert.ThrowsAny<DomainException>(() => repository.Generate(classEntities, fileDataEntity, useSnakeCase));
       Assert.Single(ex.Messages);
     }
 
@@ -77,8 +80,9 @@ namespace PostgreSQL2DTOTest.InfrastructureTest
       var mockDBRepository = new MockDBRepository();
       var classEntities = mockDBRepository.GetClasses(DBParameterEntity.Create("HostName", "UserID", "Password", "Database", 0));
       var fileDataEntity = FileDataEntity.Create("CSOutputs", "DB.Dto");
+      var useSnakeCase = false;
 
-      var messages = repository.Generate(classEntities, fileDataEntity);
+      var messages = repository.Generate(classEntities, fileDataEntity, useSnakeCase);
       Assert.Equal(2, messages.Count);
       Assert.Equal($"  >>m_test... finish{Environment.NewLine}", messages[0]);
       Assert.Equal($"  >>t_test... finish{Environment.NewLine}", messages[1]);

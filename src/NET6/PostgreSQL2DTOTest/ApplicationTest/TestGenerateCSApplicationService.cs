@@ -45,7 +45,8 @@ namespace PostgreSQL2DTOTest.ApplicationTest
     [Fact]
     public void Success()
     {
-      var inputParamModel = new InputParamModel("nameSpace", "outputPath", "hostName", "userID", "password", "database", 0);
+      var useSnakeCase = false;
+      var inputParamModel = new InputParamModel("nameSpace", "outputPath", useSnakeCase, "hostName", "userID", "password", "database", 0);
       var generetedFileResultsModel = applicationService.GenerateCSFileFromDB(inputParamModel);
 
       Assert.Equal(2, generetedFileResultsModel.Messages.Count);
