@@ -28,8 +28,6 @@ namespace PostgreSQL2DTOTest.InfrastructureTest
     public TestCSFileRepository()
     {
       repository = new CSFileRepository();
-
-      Directory.CreateDirectory("CSOutputs");
     }
 
     /// <summary>
@@ -37,7 +35,6 @@ namespace PostgreSQL2DTOTest.InfrastructureTest
     /// </summary>
     public void Dispose()
     {
-      Directory.Delete("CSOutputs", true);
     }
 
     [Fact, Trait("Category", "InfrastructureTest")]
@@ -77,6 +74,7 @@ namespace PostgreSQL2DTOTest.InfrastructureTest
     [Fact, Trait("Category", "InfrastructureTest")]
     public void CreateFiles()
     {
+      var csOutputName = "CSOutputs";
       var mockDBRepository = new MockDBRepository();
       var classEntities = mockDBRepository.GetClasses(DBParameterEntity.Create("HostName", "UserID", "Password", "Database", 0));
       var fileDataEntity = FileDataEntity.Create("CSOutputs", "DB.Dto");
@@ -91,6 +89,118 @@ namespace PostgreSQL2DTOTest.InfrastructureTest
       Assert.Equal(2, fileNames.Count);
       Assert.Equal($"{Path.Combine(fileDataEntity.OutputPath,"MTest.cs")}", fileNames[0]);
       Assert.Equal($"{Path.Combine(fileDataEntity.OutputPath,"TTest.cs")}", fileNames[1]);
+
+      // テスト終了後にフォルダ削除
+      Directory.Delete(csOutputName, true);
     }
+
+    [Fact]
+    public void CheckFileClassNotUseSnake()
+    {
+      var csOutputName = "CSOutputs2";
+
+      var mockDBRepository = new MockDBRepository();
+      var classEntities = mockDBRepository.GetClasses(DBParameterEntity.Create("HostName", "UserID", "Password", "Database", 0));
+      var fileDataEntity = FileDataEntity.Create(csOutputName, "DB.Dto");
+      var useSnakeCase = false;
+
+      repository.Generate(classEntities, fileDataEntity, useSnakeCase);
+
+      var fileNames = Directory.GetFiles(fileDataEntity.OutputPath).Where(filename => filename == $"{Path.Combine(fileDataEntity.OutputPath, "MTest.cs")}").ToList();
+      Assert.Single(fileNames);
+
+      var actual = string.Empty;
+      using (StreamReader sr = new StreamReader(fileNames[0]))
+      {
+        actual = sr.ReadToEnd();
+      }
+
+      var expected = @"using System.ComponentModel.DataAnnotations.Schema;
+namespace DB.Dto
+{
+  /// <summary>
+  /// マスタテーブル
+  /// </summary>
+  public class MTest
+  {
+    public MTest()
+    {
+    }
+    
+    /// <summary>
+    /// intになる
+    /// </summary>
+    [Column(""int_1"")]
+    public int Int1{set; get;}
+    
+    /// <summary>
+    /// Dateになる
+    /// </summary>
+    [Column(""Date_1_1"")]
+    public DateTime Date11{set; get;}
+  }
+}
+".Replace("\r\n", Environment.NewLine);
+
+      Assert.Equal(expected, actual);
+
+      // テスト終了後にフォルダ削除
+      Directory.Delete(csOutputName, true);
+    }
+
+    [Fact]
+    public void CheckFileClassUseSnake()
+    {
+      var csOutputName = "CSOutputs3";
+
+      var mockDBRepository = new MockDBRepository();
+      var classEntities = mockDBRepository.GetClasses(DBParameterEntity.Create("HostName", "UserID", "Password", "Database", 0));
+      var fileDataEntity = FileDataEntity.Create(csOutputName, "DB.Dto");
+      var useSnakeCase = true;
+
+      repository.Generate(classEntities, fileDataEntity, useSnakeCase);
+
+      var fileNames = Directory.GetFiles(fileDataEntity.OutputPath).Where(filename => filename == $"{Path.Combine(fileDataEntity.OutputPath, "MTest.cs")}").ToList();
+      Assert.Single(fileNames);
+
+      var actual = string.Empty;
+      using (StreamReader sr = new StreamReader(fileNames[0]))
+      {
+        actual = sr.ReadToEnd();
+      }
+
+      var expected = @"using System.ComponentModel.DataAnnotations.Schema;
+namespace DB.Dto
+{
+  /// <summary>
+  /// マスタテーブル
+  /// </summary>
+  public class MTest
+  {
+    public MTest()
+    {
+    }
+    
+    /// <summary>
+    /// intになる
+    /// </summary>
+    [Column(""int_1"")]
+    public int Int1{set; get;}
+    
+    /// <summary>
+    /// Dateになる
+    /// </summary>
+    [Column(""Date_1_1"")]
+    public DateTime Date1_1{set; get;}
+  }
+}
+".Replace("\r\n", Environment.NewLine);
+
+      Assert.Equal(expected, actual);
+
+      // テスト終了後にフォルダ削除
+      Directory.Delete(csOutputName, true);
+    }
+
   }
 }
