@@ -13,11 +13,15 @@ PostgreSQLのテーブル情報を取得し、C#のDTOクラスを作成する�
     dotnet runで実行する。  
     ```sh
     -- .NET6
-    dotnet run --project ./src/NET6/Presentation/ConsoleApp/ConsoleApp.csproj [NameSpace] [ファイル出力先] [DBサーバー(サーバ名やIPアドレス))] [ユーザーID] [パスワード] [データベース名] [ポート番号(省略可)]
+    dotnet run --project ./src/NET6/Presentation/ConsoleApp/ConsoleApp.csproj [NameSpace] [ファイル出力先] [DBサーバー(サーバ名やIPアドレス))] [ユーザーID] [パスワード] [データベース名] [ポート番号(省略可)]  ['useSnakeCase']
 
     -- .NET5
-    dotnet run --project ./src/NET5/Presentation/ConsoleApp/ConsoleApp.csproj [NameSpace] [ファイル出力先] [DBサーバー(サーバ名やIPアドレス))] [ユーザーID] [パスワード] [データベース名] [ポート番号(省略可)]    ```  
-    ※具体的な内容は「Dockerコンテナでの実行」を参照
+    dotnet run --project ./src/NET5/Presentation/ConsoleApp/ConsoleApp.csproj [NameSpace] [ファイル出力先] [DBサーバー(サーバ名やIPアドレス))] [ユーザーID] [パスワード] [データベース名] [ポート番号(省略可)]  ['useSnakeCase']    
+    ```  
+    ※DB接続の具体的な内容は「Dockerコンテナでの実行」を参照
+
+    ※「useSnakeCase」を入れると数値以降はテーブルの名称のままとなる。  
+    　テーブルカラム「abc_ef_**1_1**」→プロパティ「AbcEf**1_1**」
 
 * Dockerコンテナでの実行  
     Dockerコンテナ上で開発環境を構築する。  
