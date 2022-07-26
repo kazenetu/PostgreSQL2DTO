@@ -45,7 +45,7 @@ namespace Application
       if (exceptionMessages.Count > 0) throw new DomainException(exceptionMessages.AsReadOnly());
 
       var classes = dbRepository.GetClasses(DBParameterEntity.Create(inputParamModel.HostName, inputParamModel.UserID, inputParamModel.Password, inputParamModel.Database, inputParamModel.Port));
-      var messages = csFileRepository.Generate(classes, FileDataEntity.Create(inputParamModel.OutputPath, inputParamModel.NameSpace));
+      var messages = csFileRepository.Generate(classes, FileDataEntity.Create(inputParamModel.OutputPath, inputParamModel.NameSpace), inputParamModel.UseSnakeCase);
 
       return new GeneretedFileResultsModel(messages);
     }

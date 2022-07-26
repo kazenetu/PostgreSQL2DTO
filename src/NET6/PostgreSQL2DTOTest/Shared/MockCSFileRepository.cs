@@ -18,8 +18,9 @@ namespace PostgreSQL2DTOTest.Shared
     /// </summary>
     /// <param name="classEntities">出力対象のクラスエンティティリスト</param>
     /// <param name="fileDataEntity">出力情報</param>
+    /// <param name="useSnakeCase">スネークケースのままとするか</param>
     /// <returns>出力ファイル名リスト</returns>
-    public ReadOnlyCollection<string> Generate(List<ClassEntity> classEntities, FileDataEntity fileDataEntity)
+    public ReadOnlyCollection<string> Generate(List<ClassEntity> classEntities, FileDataEntity fileDataEntity, bool useSnakeCase)
     {
       // パラメーターチェック
       var exceptionMessages = new List<DomainExceptionMessage>();

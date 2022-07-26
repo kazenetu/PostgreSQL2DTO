@@ -44,16 +44,22 @@ namespace Application.Model
     public int Port { get; private set; }
 
     /// <summary>
+    /// スネークケースのままとするか
+    /// </summary>
+    public bool UseSnakeCase { get; private set; }
+
+    /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="nameSpace">CSファイルのクラスに設定する名前空間</param>
     /// <param name="outputPath">出力先ディレクトリパス</param>
+    /// <param name="useSnakeCase">スネークケースのままとするか</param>
     /// <param name="hostName">サーバーホスト</param>
     /// <param name="userID">ユーザーID</param>
     /// <param name="password">パスワード</param>
     /// <param name="database">データベース名</param>
     /// <param name="port">ポート番号(初期値：5432)</param>
-    public InputParamModel(string nameSpace, string outputPath, string hostName, string userID, string password, string database, int? port)
+    public InputParamModel(string nameSpace, string outputPath, bool useSnakeCase, string hostName, string userID, string password, string database, int? port)
     {
       // パラメーターチェック
       var exceptionMessages = new List<DomainExceptionMessage>();
@@ -73,6 +79,7 @@ namespace Application.Model
       Password = password;
       Database = database;
       Port = port.Value;
+      UseSnakeCase = useSnakeCase;
     }
   }
 }

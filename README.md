@@ -10,14 +10,28 @@ PostgreSQLのテーブル情報を取得し、C#のDTOクラスを作成する�
 
 ## 実行方法
 * ローカル実行  
-    dotnet runで実行する。  
-    ```sh
-    -- .NET6
-    dotnet run --project ./src/NET6/Presentation/ConsoleApp/ConsoleApp.csproj [NameSpace] [ファイル出力先] [DBサーバー(サーバ名やIPアドレス))] [ユーザーID] [パスワード] [データベース名] [ポート番号(省略可)]
+  1. ビルド(初回のみ)  
+      T4テンプレート利用のため、初回のみビルドする。 
+      ```sh
+      -- .NET6
+      dotnet build ./src/NET6/Presentation/ConsoleApp/ConsoleApp.csproj
 
-    -- .NET5
-    dotnet run --project ./src/NET5/Presentation/ConsoleApp/ConsoleApp.csproj [NameSpace] [ファイル出力先] [DBサーバー(サーバ名やIPアドレス))] [ユーザーID] [パスワード] [データベース名] [ポート番号(省略可)]    ```  
-    ※具体的な内容は「Dockerコンテナでの実行」を参照
+      -- .NET5
+      dotnet build ./src/NET5/Presentation/ConsoleApp/ConsoleApp.csproj
+      ```
+
+   2. dotnet runを実行する。  
+      ```sh
+      -- .NET6
+      dotnet run --project ./src/NET6/Presentation/ConsoleApp/ConsoleApp.csproj [NameSpace] [ファイル出力先] [DBサーバー(サーバ名やIPアドレス))] [ユーザーID] [パスワード] [データベース名] [ポート番号(省略可)]  ['useSnakeCase']
+
+      -- .NET5
+      dotnet run --project ./src/NET5/Presentation/ConsoleApp/ConsoleApp.csproj [NameSpace] [ファイル出力先] [DBサーバー(サーバ名やIPアドレス))] [ユーザーID] [パスワード] [データベース名] [ポート番号(省略可)]  ['useSnakeCase']    
+      ```  
+      ※DB接続の具体的な内容は「Dockerコンテナでの実行」を参照
+
+      ※「useSnakeCase」を入れると数値以降はテーブルの名称のままとなる。  
+      　テーブルカラム「abc_ef_**1_1**」→プロパティ「AbcEf**1_1**」
 
 * Dockerコンテナでの実行  
     Dockerコンテナ上で開発環境を構築する。  
@@ -47,7 +61,16 @@ PostgreSQLのテーブル情報を取得し、C#のDTOクラスを作成する�
           ```
 
       1. コンテナ内で実行 
-          1. dotnet runで実行する。
+         1. ビルド(初回のみ)  
+              T4テンプレート利用のため、初回のみビルドする。 
+              ```sh
+              -- .NET6
+              dotnet build ./src/NET6/Presentation/ConsoleApp/ConsoleApp.csproj
+
+              -- .NET5
+              dotnet build ./src/NET5/Presentation/ConsoleApp/ConsoleApp.csproj
+              ```
+          1. dotnet runを実行する。
               ```sh
               --.NET6
               dotnet run --project ./src/NET6/Presentation/ConsoleApp/ConsoleApp.csproj DB.Dto CSOutputs postgresql_server test test testDB
@@ -80,8 +103,18 @@ DBリポジトリのテスト「TestDBRepository」ではPostgreSQLを利用す�
 
 ### テスト方法
 * ローカル実行  
+  * テスト前：ビルド(初回のみ)  
+      T4テンプレート利用のため、初回のみビルドする。 
+      ```sh
+      -- .NET6
+      dotnet build ./src/NET6/Presentation/ConsoleApp/ConsoleApp.csproj
+
+      -- .NET5
+      dotnet build ./src/NET5/Presentation/ConsoleApp/ConsoleApp.csproj
+      ```
+
    * すべて実行する場合  
-        dotnet runで実行する。  
+        テストを実行する。  
         ```sh
         --.NET6
         dotnet test ./src/NET6/PostgreSQL2DTOTest/PostgreSQL2DTOTest.csproj
@@ -91,7 +124,7 @@ DBリポジトリのテスト「TestDBRepository」ではPostgreSQLを利用す�
         ```  
 
    * DBアクセスなどインフラ層のテストを除外する場合  
-        dotnet runで実行する。  
+        filterオプションを付けてテストを実行する。  
         ```sh
         --.NET6
         dotnet test ./src/NET6/PostgreSQL2DTOTest/PostgreSQL2DTOTest.csproj --filter Category!=InfrastructureTest
@@ -128,6 +161,16 @@ DBリポジトリのテスト「TestDBRepository」ではPostgreSQLを利用す�
           ```
 
       1. コンテナ内で実行 
+         1. ビルド(初回のみ)  
+              T4テンプレート利用のため、初回のみビルドする。 
+              ```sh
+              -- .NET6
+              dotnet build ./src/NET6/Presentation/ConsoleApp/ConsoleApp.csproj
+
+              -- .NET5
+              dotnet build ./src/NET5/Presentation/ConsoleApp/ConsoleApp.csproj
+              ```
+
           1. テストを実行する。  
               ```sh
               --.NET6
