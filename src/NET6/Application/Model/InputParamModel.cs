@@ -11,42 +11,42 @@ namespace Application.Model
     /// <summary>
     /// CSファイルのクラスに設定する名前空間
     /// </summary>
-    public string NameSpace { get; private set; }
+    public string NameSpace { get; init; }
 
     /// <summary>
     /// CSファイル出力先ディレクトリパス
     /// </summary>
-    public string OutputPath { get; private set; }
+    public string OutputPath { get; init; }
 
     /// <summary>
     /// DB接続情報：ホスト名
     /// </summary>
-    public string HostName { get; private set; }
+    public string HostName { get; init; }
 
     /// <summary>
     /// DB接続情報：ユーザーID
     /// </summary>
-    public string UserID { get; private set; }
+    public string UserID { get; init; }
 
     /// <summary>
     /// DB接続情報：パスワード
     /// </summary>
-    public string Password { get; private set; }
+    public string Password { get; init; }
 
     /// <summary>
     /// DB接続情報：データベース名
     /// </summary>
-    public string Database { get; private set; }
+    public string Database { get; init; }
 
     /// <summary>
     /// DB接続情報：ポート番号
     /// </summary>
-    public int Port { get; private set; }
+    public int Port { get; init; }
 
     /// <summary>
     /// スネークケースのままとするか
     /// </summary>
-    public bool UseSnakeCase { get; private set; }
+    public bool UseSnakeCase { get; init; }
 
     /// <summary>
     /// コンストラクタ

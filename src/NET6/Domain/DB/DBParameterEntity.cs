@@ -11,28 +11,28 @@ namespace Domain.DB
     /// <summary>
     /// サーバーホスト
     /// </summary>
-    public string HostName { get; private set; }
+    public string HostName { get; init; }
 
     /// <summary>
     ///　ユーザーID
     /// </summary>
-    public string UserID { get; private set; }
+    public string UserID { get; init; }
 
     /// <summary>
     /// パスワード
     /// </summary>
-    public string Password { get; private set; }
+    public string Password { get; init; }
 
     /// <summary>
     /// データベース名
     /// </summary>
-    public string Database { get; private set; }
+    public string Database { get; init; }
 
     /// <summary>
     /// ポート番号
     /// </summary>
     /// <value></value>
-    public int Port { get; private set; }
+    public int Port { get; init; }
 
     /// <summary>
     /// 非公開コンストラクタ
