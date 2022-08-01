@@ -20,7 +20,7 @@ namespace Domain.Exceptions
     /// 例外種別
     /// </summary>
     [System.Obsolete]
-    public enum ExceptionType
+    public enum ExceptionTypes
     {
       Empty,
       ParameterError,

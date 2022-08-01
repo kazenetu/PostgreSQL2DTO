@@ -34,10 +34,10 @@ namespace PostgreSQL2DTOTest.Domain.CSFiles
       var ex = Assert.ThrowsAny<DomainException>(() => FileDataEntity.Create(outputPath, nameSpace));
       Assert.Equal(2, ex.Messages.Count);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[0].MessageID);
+      Assert.Equal(ExceptionType.Empty, ex.Messages[0].MessageID);
       Assert.Equal("outputPath[]", ex.Messages[0].Target);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[1].MessageID);
+      Assert.Equal(ExceptionType.Empty, ex.Messages[1].MessageID);
       Assert.Equal("nameSpace[]", ex.Messages[1].Target);
     }
 
@@ -50,7 +50,7 @@ namespace PostgreSQL2DTOTest.Domain.CSFiles
       var ex = Assert.ThrowsAny<DomainException>(() => FileDataEntity.Create(outputPath, nameSpace));
       Assert.Single(ex.Messages);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[0].MessageID);
+      Assert.Equal(ExceptionType.Empty, ex.Messages[0].MessageID);
       Assert.Equal("outputPath[]", ex.Messages[0].Target);
     }
 
@@ -63,7 +63,7 @@ namespace PostgreSQL2DTOTest.Domain.CSFiles
       var ex = Assert.ThrowsAny<DomainException>(() => FileDataEntity.Create(outputPath, nameSpace));
       Assert.Single(ex.Messages);
 
-      Assert.Equal(DomainExceptionMessage.ExceptionType.Empty, ex.Messages[0].MessageID);
+      Assert.Equal(ExceptionType.Empty, ex.Messages[0].MessageID);
       Assert.Equal("nameSpace[]", ex.Messages[0].Target);
     }
 

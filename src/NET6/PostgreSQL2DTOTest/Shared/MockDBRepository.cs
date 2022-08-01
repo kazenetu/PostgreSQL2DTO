@@ -39,7 +39,7 @@ namespace PostgreSQL2DTOTest.Shared
       catch (Exception exception)
       {
         var exceptionMessages = new List<DomainExceptionMessage>();
-        exceptionMessages.Add(new DomainExceptionMessage($"{connectionString}", DomainExceptionMessage.ExceptionType.DBError));
+        exceptionMessages.Add(new DomainExceptionMessage($"{connectionString}", ExceptionType.DBError));
         throw new DomainException(exceptionMessages.AsReadOnly(), exception);
       }
 
