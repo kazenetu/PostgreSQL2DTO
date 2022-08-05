@@ -11,28 +11,28 @@ namespace Domain.DB
     /// <summary>
     /// サーバーホスト
     /// </summary>
-    public string HostName { get; private set; }
+    public string HostName { get; init; }
 
     /// <summary>
     ///　ユーザーID
     /// </summary>
-    public string UserID { get; private set; }
+    public string UserID { get; init; }
 
     /// <summary>
     /// パスワード
     /// </summary>
-    public string Password { get; private set; }
+    public string Password { get; init; }
 
     /// <summary>
     /// データベース名
     /// </summary>
-    public string Database { get; private set; }
+    public string Database { get; init; }
 
     /// <summary>
     /// ポート番号
     /// </summary>
     /// <value></value>
-    public int Port { get; private set; }
+    public int Port { get; init; }
 
     /// <summary>
     /// 非公開コンストラクタ
@@ -54,11 +54,11 @@ namespace Domain.DB
     {
       // パラメーターチェック
       var exceptionMessages = new List<DomainExceptionMessage>();
-      if (string.IsNullOrEmpty(hostName)) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(hostName)}[{hostName}]", DomainExceptionMessage.ExceptionType.Empty));
-      if (string.IsNullOrEmpty(userID)) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(userID)}[{userID}]", DomainExceptionMessage.ExceptionType.Empty));
-      if (string.IsNullOrEmpty(password)) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(password)}[{password}]", DomainExceptionMessage.ExceptionType.Empty));
-      if (string.IsNullOrEmpty(database)) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(database)}[{database}]", DomainExceptionMessage.ExceptionType.Empty));
-      if (!port.HasValue) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(port)}[{port}]", DomainExceptionMessage.ExceptionType.Empty));
+      if (string.IsNullOrEmpty(hostName)) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(hostName)}[{hostName}]", ExceptionType.Empty));
+      if (string.IsNullOrEmpty(userID)) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(userID)}[{userID}]", ExceptionType.Empty));
+      if (string.IsNullOrEmpty(password)) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(password)}[{password}]", ExceptionType.Empty));
+      if (string.IsNullOrEmpty(database)) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(database)}[{database}]", ExceptionType.Empty));
+      if (!port.HasValue) exceptionMessages.Add(new DomainExceptionMessage($"{nameof(port)}[{port}]", ExceptionType.Empty));
       if (exceptionMessages.Count > 0) throw new DomainException(exceptionMessages.AsReadOnly());
 
       return new DBParameterEntity()
